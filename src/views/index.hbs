@@ -1,0 +1,115 @@
+<div>
+    <h1 style="text-align: center">Products</h1>
+    <div style="text-align: center" class="p2">
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th> Product ID </th>
+                    <th> Title </th>
+                    <th> Description </th>
+                    <th> Status </th>
+                    <th> Price </th>
+                    <th> Stock </th>
+                    <th> Category </th>
+                    <th> Thumbnails </th>
+                    <th> Actions </th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each products}}
+                <tr>
+                    <td> {{ this.id }} </td>
+                    <td> {{ this.title }} </td>
+                    <td> {{ this.description }} </td>
+                    <td> {{ this.status }} </td>
+                    <td> {{ this.price }} </td>
+                    <td> {{ this.stock }} </td>
+                    <td> {{ this.category }} </td>
+                    <td> {{ this.thumbnails }} </td>
+                    <td>
+                        <a href="/edit/{{this._id}}" id="eSend" class="btn btn-success">Edit</a>
+                        <a href="/delete/{{this._id}}" id="dSend" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <h1 style="text-align: center">Carts</h1>
+    <div style="text-align: center" class="p4">
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th> Cart ID </th>
+                    <th> Products </th>
+                    <th> Quantity </th>
+                    <th> Actions </th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each carts}}
+                <tr>
+                    <td> {{ this.id }} </td>
+                    <td> {{ this.products }} </td>
+                    <td> {{ this.quiantity }} </td>
+                    <td>
+                        <a href="/view/{{this._id}}" id="cvSend" class="btn btn-warning">View</a>
+                        <a href="/edit/{{this._id}}" id="ceSend" class="btn btn-success">Edit</a>
+                        <a href="/delete/{{this._id}}" id="cdSend" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+    <form class="row p-3" action="/api/carts" method="POST">
+            <label for="products" class="col-lm-20 col-form-label col-form-label-lm">Products:</label>
+            <input class="form-control m-1" type="array" name = "products" placeholder="Products">
+
+            <label for="quantity">Quantity:</label>
+            <input class="form-control m-1" type="text" name = "quantity" placeholder="Quantity">
+            <input type="submit" value="Create Cart" class="btn btn-primary">
+    </form>
+
+    
+    <hr>
+        
+    <div>
+        <h1>Create New Products</h1>
+        <form class="row p-3" action="/api/products" method="POST">
+
+            <label for="title" class="col-lm-20 col-form-label col-form-label-lm">Title:</label>
+            <input class="form-control m-1" type="text" name = "title" placeholder="Title">
+
+            <label for="description">Description:</label>
+            <input class="form-control m-1" type="text" name = "description" placeholder="Description">
+
+            <label for="code">Code:</label>
+            <input class="form-control m-1" type="text" name = "code" placeholder="Code">
+
+            <label for="price">Price:</label>
+            <input class="form-control m-1" type="number" name = "price" placeholder="Price">
+
+            <label for="status">Status:</label>
+            <select class="form-control m-1" name = "status">
+                <option value="true">Enable</option>
+                <option value="false">Disable</option>
+            </select>
+
+            <label for="title">Stock:</label>
+            <input class="form-control m-1" type="number" name = "stock" placeholder="Stock">
+
+            <label for="title">Category:</label>
+            <input class="form-control m-1" type="text" name = "category" placeholder="Category">
+
+            <label for="title">Thumbnails:</label>
+            <input class="form-control m-1" type="URL" name = "thumbnails" placeholder="Thumbnails">
+            <hr>
+            <input type="submit" value="Create Product" class="btn btn-primary">
+        </form>
+    </div>
+</div>
