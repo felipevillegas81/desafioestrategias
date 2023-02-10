@@ -2,14 +2,24 @@ import { Router } from 'express'
 import productsDao from '../daos/dbManager/products.dao.js'
 import cartsDao from '../daos/dbManager/carts.dao.js'
 
-const router = Router()
+import productModel  from '../models/product.model.js'
 
+
+const router = Router()
 
 //Products
 router.get('/', async (req, res) => {
-    const products = await productsDao.getAll()
+    const { page } = req.query
+    const { limit } = req.query
+    const products = await productModel.paginate({}, { page: page || 1 , limit: limit || 2 });
+    //const products = await productsDao.getAll()
+    console.log(products)
+
     const carts = await cartsDao.getAll()
-    res.render('index', { title: 'Home', products, carts })
+    res.render('index', 
+    { title: 'Home', 
+    products,
+    carts })
 })
 
 router.get('/edit/:id', async (req, res) => {

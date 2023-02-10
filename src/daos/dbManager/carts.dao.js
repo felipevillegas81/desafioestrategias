@@ -1,5 +1,6 @@
 import { cartModel } from "../../models/cart.model.js"
 
+
 class CartDao {
     async getAll() {
         return await cartModel.find()

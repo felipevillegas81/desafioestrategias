@@ -8,6 +8,8 @@ import mongoose from 'mongoose';
 import Handlebars from 'handlebars';
 import { allowInsecurePrototypeAccess } from '@handlebars/allow-prototype-access'
 
+import productModel from './models/product.model.js';
+
 const app = express()
 const port = 8080
 

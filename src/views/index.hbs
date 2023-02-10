@@ -16,7 +16,7 @@
                 </tr>
             </thead>
             <tbody>
-                {{#each products}}
+                {{#each products.docs}}
                 <tr>
                     <td> {{ this.id }} </td>
                     <td> {{ this.title }} </td>
@@ -29,11 +29,23 @@
                     <td>
                         <a href="/edit/{{this._id}}" id="eSend" class="btn btn-success">Edit</a>
                         <a href="/delete/{{this._id}}" id="dSend" class="btn btn-danger">Delete</a>
+
+                        <a href="/delete/{{this._id}}" id="dcSend" class="btn btn-info">Delete From Cart</a>
+
                     </td>
                 </tr>
                 {{/each}}
             </tbody>
         </table>
+        <div>
+            <a href="/?page={{products.prevPage}}&&limit=" id="prevPage">Anterior</a>
+            <a href="/?page={{products.nextPage}}&&limit=" id="nextPage">Siguiente</a>
+        </div>
+        </div>
+            <h5>
+                Pagina:{{ products.page }} / Total Paginas:{{ products.totalPages }}
+            </h5>
+        </div>
     </div>
 
     <hr>
