@@ -27,6 +27,11 @@ router.get('/edit/:id', async (req, res) => {
     res.render('edit', { title: 'Edit', product })
 })
 
+router.get('/viewProduct/:id', async (req, res) => {
+    const product = await productsDao.getById(req.params.id)
+    res.render('viewProduct', { title: 'viewProduct', product })
+})
+
 router.get('/delete/:id', async (req, res) => {
     const product = await productsDao.delete(req.params.id)
     const products = await productsDao.getAll()

@@ -46,7 +46,7 @@ router.delete("/:id", async (req, res) => {
     try {
         const product = await productsDao.delete(req.params.id)
         res.redirect('/?message=product deleted successfully')
-        res.json(product)
+        res.json(products)
     } catch (error) {
         res.status(500).json( {error: error.message} )
     }

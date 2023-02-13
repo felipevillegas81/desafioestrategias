@@ -1,0 +1,36 @@
+</div>
+    <h1 style="text-align: center">View Product</h1>
+    <form class="row p-3">
+        <label for="id" >ID:</label>
+        <input class="form-control" type="text" disabled id="id" name="id" value="{{ product.id }}">
+
+        <label for="title" >Title:</label>
+        <input class="form-control m-1" type="text" disabled name="title" value="{{product.title}}" id="title">
+
+        <label for="description">Description:</label>
+        <input class="form-control m-1" type="text" disabled name="description" value="{{product.description}}" id="description">
+
+        <label for="code">Code:</label>
+        <input class="form-control m-1" type="text" disabled name="code" value="{{product.code}}" id="code">
+
+        <label for="price">Price:</label>
+        <input class="form-control m-1" type="number" disabled disabledname="price" value="{{product.price}}" id="price">
+
+        <label for="actualStatus">Actual Status:</label>
+        <input class="form-control m-1" disabled type="boolean" name="actualStatus" value="{{product.status}}">
+
+        <label for="title">Stock:</label>
+        <input class="form-control m-1" type="number" disabled name="stock" value="{{product.stock}}" id="stock">
+
+        <label for="title">Category:</label>
+        <input class="form-control m-1" type="text" disabled name="category" value="{{product.category}}" id="category">
+
+        <label for="title">Thumbnails:</label>
+        <input class="form-control m-1" type="URL" disabled name="thumbnails" value="{{product.thumbnails}}" id="thumbnails">
+
+        <hr>
+        <input type="submit" value="Add to Cart" class="btn btn-primary" id="vSend">
+    </form>
+</div>
+
+{{!-- <script src='/js/viewProduct.js'></script> --}}
