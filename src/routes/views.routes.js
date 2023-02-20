@@ -6,14 +6,35 @@ import productModel  from '../models/product.model.js'
 
 
 const router = Router()
+const isSession = (req, res, next) => {
+    if (req.session.user){
+        return res.redirect('profile')
+    }
+    next()
+}
+//Login
+router.get('/login', isSession, (req, res) => {
+    res.render('login')
+})
+
+router.get('/register', isSession, (req, res) => {
+    res.render('register')
+})
+
+router.get('/profile',(req, res) => {
+    if(!req.session.user){
+        return res.redirect('/login')
+    }
+    res.render('profile', {user: req.session.user})
+})
 
 //Products
 router.get('/', async (req, res) => {
     const { page } = req.query
     const { limit } = req.query
     const products = await productModel.paginate({}, { page: page || 1 , limit: limit || 2 });
-    //const products = await productsDao.getAll()
-    console.log(products)
+//    const products = await productsDao.getAll()
+console.log(products)
 
     const carts = await cartsDao.getAll()
     res.render('index', 
