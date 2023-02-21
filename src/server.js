@@ -3,7 +3,7 @@ import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import { userModel } from './models/user.model.js';
 import handlebars from 'express-handlebars';
-import __dirname from './dirname.js';
+import __dirname from './utils.js';
 import productsRoutes from './routes/products.routes.js'
 import cartsRoutes from './routes/carts.routes.js'
 import viewsRoutes from './routes/views.routes.js'

@@ -1,5 +1,6 @@
 import { Router } from "express"
 import { userModel } from '../models/user.model.js'
+import { comparePassword, hashPassword } from "../utils.js"
 
 const router = Router()
 
@@ -7,11 +8,15 @@ router.post('/login', async (req, res) => {
     const { email, password } = req.body
 
     try {
-        const user = await userModel.findOne({ email, password })
+        const user = await userModel.findOne({ email })
 
         if(!user) {
             return res.status(404).json({ message: 'User not found' })
         }
+
+    if(!comparePassword(user,password)) {
+        return res.status(401).json({ message: 'Invalid Password'})
+    }
 
         user['password'] = undefined
         req.session.user = user
@@ -41,7 +46,7 @@ router.post('/register', async (req, res) => {
             last_name, 
             email, 
             age, 
-            password,
+            password: hashPassword(password),
             role })
         res.status(201).redirect('/login')
     } catch(error) {
