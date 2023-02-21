@@ -5,7 +5,7 @@ import { comparePassword, hashPassword } from "../utils.js"
 
 const router = Router()
 
-router.post('/login', passport.authenticate("login", { failureRedirect: '/session/failLogin' }), async (req, res) => {
+router.post('/login', passport.authenticate("login", { failureRedirect: '/failLogin' }), async (req, res) => {
     if(!req.user) {
         return res.status(404).json({ message: 'User not found' })
     }
