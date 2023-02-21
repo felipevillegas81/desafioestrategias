@@ -1,57 +1,36 @@
 import { Router } from "express"
+import passport from "passport"
 import { userModel } from '../models/user.model.js'
 import { comparePassword, hashPassword } from "../utils.js"
 
 const router = Router()
 
-router.post('/login', async (req, res) => {
-    const { email, password } = req.body
-
-    try {
-        const user = await userModel.findOne({ email })
-
-        if(!user) {
-            return res.status(404).json({ message: 'User not found' })
-        }
-
-    if(!comparePassword(user,password)) {
-        return res.status(401).json({ message: 'Invalid Password'})
+router.post('/login', passport.authenticate("login", { failureRedirect: '/session/failLogin' }), async (req, res) => {
+    if(!req.user) {
+        return res.status(404).json({ message: 'User not found' })
     }
 
-        user['password'] = undefined
-        req.session.user = user
-
-        res.status(200).redirect('/profile')
-    } catch(error) {
-        res.status(500).json({ message: error.message })
+    req.session.user = {
+        first_names: req.user.first_name,
+        last_name: req.user.last_name,
+        email: req.user.email,
+        age: req.user.age,
+        role: req.user.role
     }
+
+    res.status(200).redirect('/profile')
 })
 
-router.post('/register', async (req, res) => {
-    const { 
-        first_name, 
-        last_name, 
-        email, 
-        age, 
-        password, 
-        role } = req.body
+router.get('/failLogin', (req, res) => {
+    res.status(401).json({ message: 'You are not authenticated' })
+})
 
-    if(!first_name || !last_name || !email || !age || !password) {
-        return res.status(400).json({ message: 'Missing required fields' })
-    }
+router.post('/register',passport.authenticate("register", { failureRedirect: '/session/failRegister' }), async (req, res) => {
+    return res.status(201).redirect('/login')
+})
 
-    try {
-        const user = await userModel.create({ 
-            first_name, 
-            last_name, 
-            email, 
-            age, 
-            password: hashPassword(password),
-            role })
-        res.status(201).redirect('/login')
-    } catch(error) {
-        res.status(500).json({message: error.message })
-    }
+router.get('/failRegister', (req, res) => {
+    res.status(401).json({ message: 'You are not registered' })
 })
 
 router.post('/restore', async (req, res) => {

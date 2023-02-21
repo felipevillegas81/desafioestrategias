@@ -11,6 +11,7 @@ import sessionRoutes from './routes/session.routes.js'
 import mongoose from 'mongoose';
 import Handlebars from 'handlebars';
 import MongoStore from 'connect-mongo';
+import initializePassport from './config/passport.config.js';
 
 import { allowInsecurePrototypeAccess } from '@handlebars/allow-prototype-access'
 
@@ -47,6 +48,12 @@ mongoose.connect('mongodb+srv://felipevillegas81:Energia19B@coder.jqjafac.mongod
     console.log('Connected to MongoDB Atlas');
     }
 })
+
+//Passport
+
+initializePassport()
+app.use(passport.initialize())
+app.use(passport.session())
 
 // Handlebars
 app.engine('hbs', handlebars.engine({
