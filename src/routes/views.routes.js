@@ -12,6 +12,16 @@ const isSession = (req, res, next) => {
     }
     next()
 }
+
+//router.get('/', (req, res) => {
+//    res.redirect('/login')
+//})
+
+//Restore
+router.get('/restore', isSession, (req, res) => {
+    res.render('restore')
+})
+
 //Login
 router.get('/login', isSession, (req, res) => {
     res.render('login')

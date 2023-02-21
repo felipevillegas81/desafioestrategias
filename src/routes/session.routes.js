@@ -54,6 +54,28 @@ router.post('/register', async (req, res) => {
     }
 })
 
+router.post('/restore', async (req, res) => {
+    const { email, password } = req.body
+
+    try{
+        const user = await userModel.findOne({ email })
+
+        if(!user) {
+            return res.status(404).json({ message: 'User not found' })
+        }
+
+        if(comparePassword(user, password)){
+            return res.json({ message: 'Passwords is the same' })
+        }
+
+        user.password = hashPassword(password)
+        await user.save()
+        return res.json({ message: 'Passwords updated' })
+    } catch(error) {
+        res.status(500).json({ message: error.message })
+    }
+})
+
 router.get('/logout', async (req, res) => {
     req.session.destroy()
     res.redirect('/login')
