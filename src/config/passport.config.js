@@ -1,7 +1,7 @@
 import passport from "passport";
 import local from "passport-local";
-import { userModel } from "../src/models/user.model.js";
-import { hashPassword, comparePassword } from "../src/utils.js";
+import { userModel } from "../models/user.model.js";
+import { hashPassword, comparePassword } from "../utils.js";
 
 const LocalStrategy = local.Strategy;
 

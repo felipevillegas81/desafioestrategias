@@ -11,7 +11,7 @@ import sessionRoutes from './routes/session.routes.js'
 import mongoose from 'mongoose';
 import Handlebars from 'handlebars';
 import MongoStore from 'connect-mongo';
-import initializePassport from '../config/passport.config.js';
+import initializePassport from './config/passport.config.js';
 import passport from 'passport';
 
 import { allowInsecurePrototypeAccess } from '@handlebars/allow-prototype-access'
