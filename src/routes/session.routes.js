@@ -5,6 +5,13 @@ import { comparePassword, hashPassword } from "../utils.js"
 
 const router = Router()
 
+router.get('/github', passport.authenticate('github', {scope: ['user:email'] }))
+
+router.get('/githubcallback', passport.authenticate('github', { failureRedirect: '/login' }), (req, res) => {
+    req.session.user = req.user
+    res.redirect('/')
+})
+
 router.post('/login', passport.authenticate("login", { failureRedirect: '/failLogin' }), async (req, res) => {
     if(!req.user) {
         return res.status(404).json({ message: 'User not found' })

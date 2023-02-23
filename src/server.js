@@ -71,6 +71,7 @@ app.use(express.urlencoded({ extended: true }))
 
 // Routes
 app.use('/', viewsRoutes);
+app.use('/api/sessions', sessionRoutes)
 app.use('/session', sessionRoutes)
 app.use('/api/products', productsRoutes);
 app.use('/api/carts', cartsRoutes);
