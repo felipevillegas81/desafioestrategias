@@ -52,7 +52,8 @@ console.log(products)
     res.render('index', 
     { title: 'Home', 
     products,
-    carts })
+    carts,
+    user: req.session.user})
 })
 
 router.get('/edit/:id', async (req, res) => {
