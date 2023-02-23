@@ -13,16 +13,7 @@
             </ul>
             <a href="/session/logout">Cerrar Sesion</a>
 
-        {{ else }}
-        <h1>Hi, how do you want login</h1>
-        <a href="/session/github" class="btn btn-warning">Inicir Sesion GitHub</a> <br><br>
-        <a href="/login" class="btn btn-info">Iniciar Sesion Local</a> <br><br>
-        <a href="/register" class="btn btn-success">Registrese</a> 
-        
-        {{/if}}
-    </div>
-
-    <h1 style="text-align: center">Products</h1>
+            <h1 style="text-align: center">Products</h1>
     <div style="text-align: center" class="p2">
         <table class="table">
             <thead class="table-dark">
@@ -148,4 +139,15 @@
             <input type="submit" value="Create Product" class="btn btn-primary">
         </form>
     </div>
+
+        {{ else }}
+        <h1>Hi, how do you want login</h1>
+        <a href="/session/github" class="btn btn-warning">Inicir Sesion GitHub</a> <br><br>
+        <a href="/login" class="btn btn-info">Iniciar Sesion Local</a> <br><br>
+        <a href="/register" class="btn btn-success">Registrese</a> 
+        
+        {{/if}}
+    </div>
+
+    
 </div>
